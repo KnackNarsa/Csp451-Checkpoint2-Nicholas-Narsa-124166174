@@ -1,4 +1,5 @@
 // database.js
+// NicholasNarsa2
 
 let dbConnected = false;
 let users = [];
