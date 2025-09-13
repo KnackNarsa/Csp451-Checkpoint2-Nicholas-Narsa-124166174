@@ -1,26 +1,30 @@
 const express = require('express');
-const { login, resetPassword } = require('./login'); // import from login.js
 const router = express.Router();
+const { getUser, addUser, updateUserPassword } = require('./database');
 
-// Login 
+// Login
 router.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  if (login(username, password)) {
-    res.send('Login successful');
-  } else {
-    res.status(401).send('Invalid username or password');
-  }
+    const { username, password } = req.body;
+    const storedPassword = getUser(username);
+
+    if (storedPassword && storedPassword === password) {
+        req.session.user = { username };
+        res.json({ success: true, user: { username } });
+    } else {
+        res.json({ success: false, message: 'Invalid credentials' });
+    }
 });
 
-// Reset password
-router.post('/reset-password', (req, res) => {
-  const { username, newPassword } = req.body;
-  if (resetPassword(username, newPassword)) {
-    res.send('Password updated successfully');
-  } else {
-    res.status(400).send('User not found');
-  }
+// Logout
+router.post('/logout', (req, res) => {
+    req.session.destroy();
+    res.json({ success: true });
+});
+
+// Session check
+router.get('/session', (req, res) => {
+    if (req.session.user) res.json({ loggedIn: true, user: req.session.user });
+    else res.json({ loggedIn: false });
 });
 
 module.exports = router;
-
