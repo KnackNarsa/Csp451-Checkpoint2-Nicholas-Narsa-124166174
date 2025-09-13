@@ -1,9 +1,17 @@
 // database.js
 // NicholasNarsa2
 
+
 let dbConnected = false;
 let users = [];
 let nextId = 1;
+
+const users = {
+  nnarsa: 'password',
+  nnarsa2: 'password'
+};
+
+
 
 function connectDB() {
     dbConnected = true;
