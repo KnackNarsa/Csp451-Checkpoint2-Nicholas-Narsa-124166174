@@ -103,17 +103,21 @@ git remote add origin https://github.com/KnackNarsa/CSP451-CheckPoint1-NicholasN
 git push -u origin main
 ```
 
-### Contributing Guidelines
-
-This repository is for a school assignment.
-I will not be accepting contributions at this time.
-
-### License Information
-
-This repository is for a school assignment and is not licensed for public use.
-
 
 # CSP451-Checkpoint 2
+
+### Edit Database
+
+To edit login credentials, go to `cont users` in `database.js` using syntax.
+
+```java
+const users = {
+  nnarsa: 'password',
+  nnarsa2: 'password',
+  username: 'password'
+};
+```
+
 
 
 ### Usage example
@@ -121,7 +125,7 @@ This repository is for a school assignment and is not licensed for public use.
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/KnackNarsa/Csp451-Checkpoint2-Nicholas-Narsa-124166174.bit
+git clone https://github.com/KnackNarsa/Csp451-Checkpoint2-Nicholas-Narsa-124166174.git
 ```
 
 2. Change to directory:
@@ -148,7 +152,21 @@ npm install express express-session
 node index.js
 ```
 
-6. Visit server
+6. Visit the server
+
 ```
 http://localhost:3000
 ```
+
+7. Login using credentials from `database.js`
+
+### Contributing Guidelines
+
+This repository is for a school assignment.
+I will not be accepting contributions at this time.
+
+### License Information
+
+This repository is for a school assignment and is not licensed for public use.
+
+
