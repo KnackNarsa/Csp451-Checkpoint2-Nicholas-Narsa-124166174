@@ -1,6 +1,6 @@
 # CSP451-2025-Checkpoint2
 ## Introduction to GitHub and Version Control
-### By Nicholas Narsa2
+### By Nicholas Narsa1, Nicholas Narsa2, Nicholas Narsa3
 
 ### Learning Objectives
 
