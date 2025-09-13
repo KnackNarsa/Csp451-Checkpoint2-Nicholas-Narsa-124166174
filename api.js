@@ -1,46 +1,26 @@
-// api.js
-// NicholasNarsa3
-const express = require("express");
-const db = require("./database");
-const app = express();
-app.use(express.json());
+const express = require('express');
+const { login, resetPassword } = require('./login'); // import from login.js
+const router = express.Router();
 
-db.connectDB(); // Ensure database is connected
-
-// Get all users
-app.get("/users", (req, res) => {
-    res.json(db.queryUsers());
+// Login 
+router.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  if (login(username, password)) {
+    res.send('Login successful');
+  } else {
+    res.status(401).send('Invalid username or password');
+  }
 });
 
-
-// Get user by ID
-app.get("/users/:id", (req, res) => {
-    const users = db.queryUsers();
-    const user = users.find(u => u.id === parseInt(req.params.id));
-    if (!user) return res.status(404).send("User not found");
-    res.json(user);
+// Reset password
+router.post('/reset-password', (req, res) => {
+  const { username, newPassword } = req.body;
+  if (resetPassword(username, newPassword)) {
+    res.send('Password updated successfully');
+  } else {
+    res.status(400).send('User not found');
+  }
 });
 
-// Post create user
-app.post("/users", (req, res) => {
-    const user = db.insertUser(req.body);
-    res.status(201).json(user);
-});
-
-// Put update user
-app.put("/users/:id", (req, res) => {
-    const user = db.updateUser(parseInt(req.params.id), req.body);
-    if (!user) return res.status(404).send("User not found");
-    res.json(user);
-});
-
-// Delete user
-app.delete("/users/:id", (req, res) => {
-    const deleted = db.deleteUser(parseInt(req.params.id));
-    if (!deleted) return res.status(404).send("User not found");
-    res.json(deleted);
-});
-
-const PORT = 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+module.exports = router;
 
