@@ -45,3 +45,6 @@ function queryUsers() {
     if (!dbConnected) return [];
     return users;
 }
+
+module.exports = { connectDB, disconnectDB, insertUser, updateUser, deleteUser, queryUsers };
+
