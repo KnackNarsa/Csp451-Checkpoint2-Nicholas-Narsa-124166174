@@ -1,14 +1,14 @@
-# CSP451-2025-Checkpoint1
+# CSP451-2025-Checkpoint3
 ## Introduction to GitHub and Version Control
-### By Nicholas Narsa
+### By Nicholas Narsa2 did all the work
 
 ### Learning Objectives
 
 By completing this checkpoint, you will be able to:
 
- * Understand the fundamentals of version control systems
- * Master Basic Git commands and workflows
- * Create and manage GitHub repositories effectively
+ * This is all wrong and needs to be changed
+ * I hoped this occurs a conflict, it did not work beofre
+ * woooooh
  * Write professional documentation using Markdown syntax
 
 ### Installation instructions (Debian/Ubuntu):
