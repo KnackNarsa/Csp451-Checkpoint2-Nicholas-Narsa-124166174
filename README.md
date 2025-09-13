@@ -118,21 +118,37 @@ This repository is for a school assignment and is not licensed for public use.
 
 ### Usage example
 
-login.js
+1. Clone the repository:
 
-```js
-login("alice", "password123");
-login("bob", "wrongpassword");
-resetPassword("bob", "newpassword");
-login("bob", "newpassword");
-logout("alice");
+```bash
+git clone https://github.com/KnackNarsa/Csp451-Checkpoint2-Nicholas-Narsa-124166174.bit
 ```
 
-database.js
+2. Change to directory:
 
-```js
-connectDB();
-insertUser({ username: "alice", password: "pass123" });
-insertUser({ username: "bob", password: "qwerty" });
-disconnectDB();
+```bash
+cd /Csp451-Checkpoint2-Nicholas-Narsa
+```
+
+3. Initalize node
+
+```bash
+npm init -y
+```
+
+4. Install dependencies
+
+```bash
+npm install express express-session
+```
+
+5. Run server
+
+```bash
+node index.js
+```
+
+6. Visit server
+```
+http://localhost:3000
 ```
