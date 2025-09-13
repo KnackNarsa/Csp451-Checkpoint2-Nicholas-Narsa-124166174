@@ -1,29 +1,24 @@
-// user-auth.js
-const db = require("./database"); // Use database module
+// login.js
 
-// Validate username/password format
-function validateLogin(username, password) {
-    if (!username || !password) return false;
-    return username.length >= 3 && password.length >= 6;
-}
+const { getUser, updateUserPassword } = require('./database');
 
-// Login using database users
+// Login function
 function login(username, password) {
-    const users = db.queryUsers();
-    if (!validateLogin(username, password)) return false;
-    const user = users.find(u => u.username === username && u.password === password);
-    return !!user;
+  const storedPassword = getUser(username);
+  return storedPassword === password;
 }
 
+// Logout function
 function logout(username) {
-    console.log(`Logging out ${username}`);
+  console.log(`${username} logged out`);
 }
 
-function resetPassword(username, newPassword) {
-    const users = db.queryUsers();
-    const user = users.find(u => u.username === username);
-    if (user) user.password = newPassword;
+
+// Check if user exists
+function isUserExists(username) {
+  return getUser(username) !== undefined;
 }
 
-module.exports = { login, logout, resetPassword };
+
+module.exports = { login, logout, resetPassword, isUserExists };
 

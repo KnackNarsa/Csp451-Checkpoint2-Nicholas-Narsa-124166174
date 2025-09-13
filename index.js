@@ -1,19 +1,26 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const apiRoutes = require('./api'); // api.js routes
+const session = require('express-session');
+const apiRoutes = require('./api');
 
 const app = express();
 
-// Middleware to parse JSON requests
+// Middleware
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(session({
+    secret: 'secret-key',
+    resave: false,
+    saveUninitialized: true
+}));
 
-// Serve static frontend files
+// Serve frontend
 app.use(express.static('public'));
 
-// Use API routes for login/reset-password
+// API routes
 app.use('/api', apiRoutes);
 
 // Start server
 app.listen(3000, () => {
-  console.log('Server running at http://localhost:3000');
+    console.log('Server running at http://localhost:3000');
 });

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Example</title>
+</head>
+<body>
+  <div id="loginDiv">
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button id="loginBtn">Login</button>
+  </div>
+
+  <div id="logoutDiv" style="display:none;">
+    <h3>Welcome, <span id="userName"></span>!</h3>
+    <button id="logoutBtn">Logout</button>
+  </div>
+
+  <script>
+    const loginBtn = document.getElementById('loginBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const loginDiv = document.getElementById('loginDiv');
+    const logoutDiv = document.getElementById('logoutDiv');
+    const userName = document.getElementById('userName');
+
+    // Check session on page load
+    fetch('/api/session')
+      .then(res => res.json())
+      .then(data => {
+        if (data.loggedIn) showLogout(data.user);
+      });
+
+    loginBtn.addEventListener('click', () => {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) showLogout(data.user);
+        else alert('Invalid credentials');
+      });
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      fetch('/api/logout', { method: 'POST' })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            loginDiv.style.display = 'block';
+            logoutDiv.style.display = 'none';
+          }
+        });
+    });
+
+    function showLogout(user) {
+      loginDiv.style.display = 'none';
+      logoutDiv.style.display = 'block';
+      userName.textContent = user.username;
+    }
+  </script>
+</body>
+</html>
