@@ -111,3 +111,28 @@ I will not be accepting contributions at this time.
 ### License Information
 
 This repository is for a school assignment and is not licensed for public use.
+
+
+# CSP451-Checkpoint 2
+
+
+### Usage example
+
+login.js
+
+```js
+login("alice", "password123");
+login("bob", "wrongpassword");
+resetPassword("bob", "newpassword");
+login("bob", "newpassword");
+logout("alice");
+```
+
+database.js
+
+```js
+connectDB();
+insertUser({ username: "alice", password: "pass123" });
+insertUser({ username: "bob", password: "qwerty" });
+disconnectDB();
+```

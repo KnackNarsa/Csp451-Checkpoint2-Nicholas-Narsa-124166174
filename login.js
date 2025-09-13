@@ -24,3 +24,6 @@ function resetPassword(username, newPassword) {
     const user = users.find(u => u.username === username);
     if (user) user.password = newPassword;
 }
+
+module.exports = { login, logout, resetPassword };
+
