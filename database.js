@@ -2,9 +2,6 @@
 // NicholasNarsa2
 
 
-let dbConnected = false;
-let users = [];
-let nextId = 1;
 
 const users = {
   nnarsa: 'password',
@@ -12,47 +9,23 @@ const users = {
 };
 
 
-
-function connectDB() {
-    dbConnected = true;
-    console.log("Database connected");
+// Get a user's password
+function getUser(username) {
+  return users[username];
 }
 
-function disconnectDB() {
-    dbConnected = false;
-    console.log("Database disconnected");
+// Add a new user
+function addUser(username, password) {
+  if (users[username]) return false; // user exists
+  users[username] = password;
+  return true;
 }
 
-function insertUser(data) {
-    if (!dbConnected) return console.log("DB not connected");
-    const user = { id: nextId++, ...data };
-    users.push(user);
-    console.log("Inserted user:", user);
-    return user;
+// Update a user's password
+function updateUserPassword(username, newPassword) {
+  if (!users[username]) return false; // user doesn't exist
+  users[username] = newPassword;
+  return true;
 }
 
-function updateUser(id, data) {
-    if (!dbConnected) return console.log("DB not connected");
-    const user = users.find(u => u.id === id);
-    if (user) Object.assign(user, data);
-    console.log("Updated user:", user);
-    return user;
-}
-
-function deleteUser(id) {
-    if (!dbConnected) return console.log("DB not connected");
-    const index = users.findIndex(u => u.id === id);
-    if (index !== -1) {
-        const deleted = users.splice(index, 1)[0];
-        console.log("Deleted user:", deleted);
-        return deleted;
-    }
-}
-
-function queryUsers() {
-    if (!dbConnected) return [];
-    return users;
-}
-
-module.exports = { connectDB, disconnectDB, insertUser, updateUser, deleteUser, queryUsers };
-
+module.exports = { getUser, addUser, updateUserPassword };
